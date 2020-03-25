@@ -28,14 +28,12 @@ void setup() {
 
 void draw() {
   //out
-  for (int i = 0, i < bitSize; i++) {
-  
-  
+  for (int i = 0; i < bitSize; i++) {
+    //flip flops
+    
+    //adders
+    
+    //in
+    
   }
-}
-
-
-class point {
-  float x;
-  float y;
 }
