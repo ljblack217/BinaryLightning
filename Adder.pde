@@ -25,6 +25,22 @@ class adder {
     gAnd2 = new and(posX+16, posY+16);
     gOr1 = new or(posX+78, posY+78, false);
   }
-  void drawAdder() {
+  void drawAdder(float in1X, float in1Y, int bit) {
+      //in 1 to xor1 and and1
+      
+      //flip flop out to xor1 and and1
+      
+      //cIn to xor1 and and2
+      
+      //xor1 to zor2 and and2
+      
+      //and1 to or1
+      
+      //and2 to or1
+      
+      //or one to next adder
+      
+      //xor 1 to flip flop
+      
   }
 }

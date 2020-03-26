@@ -22,6 +22,16 @@ class flipFlop {
   }
   
   void drawFlipFlop(){
+    //in1 to and1 and and2
     
+    //clk to and 1 and and2
+    
+    //and1 to or1
+    
+    //and2 to or2
+    
+    //or1 to out and or2 and and1
+    
+    // or2 to or1 and and2
   }
 }
