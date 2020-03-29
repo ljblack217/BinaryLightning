@@ -5,6 +5,9 @@ adder[] adders;
 flipFlop[] flipFlops;
 boolean[] inNum;
 boolean[] outNum;
+float clockX;
+float clockY;
+boolean clock;
 
 void setup() {
   inNum = new boolean[bitSize];

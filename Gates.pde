@@ -2,11 +2,11 @@ class xor {
   boolean in1;
   boolean in2;
   boolean out1;
-  float posX;
-  float posY;
-  xor(float x, float y) {
-    posX = x;
-    posY = y;
+  float x;
+  float y;
+  xor(float posX, float posY) {
+    x = posX;
+    y = posY;
     in1 = false;
     in2 = false;
     out1 = false;
@@ -23,11 +23,11 @@ class and {
   boolean in1;
   boolean in2;
   boolean out1;
-  float posX;
-  float posY;
-  and(float x, float y) {
-    posX = x;
-    posY = y;
+  float x;
+  float y;
+  and(float posX, float posY) {
+    x = posX;
+    y = posY;
     in1 = false;
     in2 = false;
     out1 = false;
@@ -45,11 +45,11 @@ class or {
   boolean in2;
   boolean out1;
   boolean reverseOut;
-  float posX;
-  float posY;
-  or(float x, float y, boolean r) {
-    posX = x;
-    posY = y;
+  float x;
+  float y;
+  or(float posX, float posY, boolean r) {
+    x = posX;
+    y = posY;
     reverseOut = r;
     in1 = false;
     in2 = false;

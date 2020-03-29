@@ -14,7 +14,6 @@ class adder {
   adder(float x, float y) {
     in1 = false;
     in2 = false;
-    cIn = false;
     cOut = false;
     out = false;
     posX = x;
@@ -26,21 +25,38 @@ class adder {
     gOr1 = new or(posX+78, posY+78, false);
   }
   void drawAdder(float in1X, float in1Y, int bit) {
+    stroke(255);
+    strokeWeight(3);
       //in 1 to xor1 and and1
-      
+      if(inNum[bit]== true){
+        line(in1X, in1Y, gXor1.x,gXor1.y);
+        line(in1X, in1Y, gAnd1.x, gAnd1.y);
+      }
       //flip flop out to xor1 and and1
-      
+      if(flipFlops[bit].out == true){
+        line(flipFlops[bit].gOr1.x,flipFlops[bit].gOr1.y, gXor1.x, gXor1.y);
+        line(flipFlops[bit].gOr1.x,flipFlops[bit].gOr1.y, gAnd1.x, gAnd1.y);
+      }
       //cIn to xor1 and and2
+      if(cIn == true){
+        line(adders[bit-1].gOr1.x,adders[bit-1].gOr1.y, gXor1.x, gXor1.y);
+        line(adders[bit-1].gOr1.x,adders[bit-1].gOr1.y, gAnd2.x, gAnd2.y);
+      }
       
       //xor1 to zor2 and and2
+      if (gXor1.out1 == true){
+        line(gXor1.x, gXor1.y, gXor2.x,gXor2.y);
+        line(gXor1.x, gXor1.y, gAnd2.x,gAnd2.y);
+      }
       
       //and1 to or1
-      
+      if(gAnd1.out1 == true){
+        line(gAnd1.x, gAnd1.y, gOr1.x, gOr1.y); 
+      }
       //and2 to or1
-      
-      //or one to next adder
-      
-      //xor 1 to flip flop
+      if(gAnd2.out1 == true){
+        line(gAnd2.x, gAnd2.y, gOr1.x, gOr1.y);
+      }
       
   }
 }
