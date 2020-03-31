@@ -23,11 +23,13 @@ class and {
   boolean in1;
   boolean in2;
   boolean out1;
+  boolean reverse;
   float x;
   float y;
-  and(float posX, float posY) {
+  and(float posX, float posY, boolean r) {
     x = posX;
     y = posY;
+    reverse = r;
     in1 = false;
     in2 = false;
     out1 = false;
@@ -37,6 +39,13 @@ class and {
       out1 = true;
     } else {
       out1 = false;
+    }
+    if (reverse) {
+      if (out1) {
+        out1 = false;
+      } else {
+        out1 = true;
+      }
     }
   }
 }
@@ -66,13 +75,12 @@ class or {
   boolean in1;
   boolean in2;
   boolean out1;
-  boolean reverseOut;
   float x;
   float y;
-  or(float posX, float posY, boolean r) {
+  or(float posX, float posY) {
     x = posX;
     y = posY;
-    reverseOut = r;
+
     in1 = false;
     in2 = false;
     out1 = false;
