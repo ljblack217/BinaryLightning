@@ -1,5 +1,4 @@
 class flipFlop {
-
   boolean out; 
   boolean calc8;
   and gAnd1;
@@ -9,7 +8,6 @@ class flipFlop {
   float posX;
   float posY;
   flipFlop(float x, float y) {
-
     out = false;
     posX = x;
     posY = y;
@@ -26,7 +24,8 @@ class flipFlop {
   void drawFlipFlop(int bit, float outBitX, float outBitY) {
     //in1 to and1 and and2
     textSize(12);
-    fill(255);
+    stroke(255);
+    noFill();
     if (adders[bit].gXor2.out1 == true) {
       line(adders[bit].gXor2.x, adders[bit].gXor2.y, gAnd1.x, gAnd1.y);
       line(adders[bit].gXor2.x, adders[bit].gXor2.y, gAnd2.x, gAnd2.y);
@@ -88,7 +87,6 @@ class flipFlop {
     gAnd3.calc();
     //and2 to or2
     gAnd4.in1 = gAnd1.out1;
-    // or2 to or1 and and2
 
 
     //or1 to out and or2 and and1 and adder.xor 1 and Out

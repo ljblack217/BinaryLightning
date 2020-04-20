@@ -16,7 +16,7 @@ int clockCount = 0;
 boolean bClockCount = false;
 PFont consolas;
 void setup() {
-  consolas = createFont("Consolas.ttf",32);
+  consolas = createFont("Consolas.ttf", 32);
   textFont(consolas);
   bInNum = new boolean[bitSize];
   bOutNum = new boolean[bitSize];
@@ -40,17 +40,20 @@ void setup() {
 }
 
 void draw() {
+  stroke(0);
+  fill(0,40);
+  rect(0,0,width,height);
   stroke(255);
-  strokeWeight(2);
+  strokeWeight(1.5);
   //drawing visuals
-  drawNumber(50,60,sInNum);
+  
   if (clockCount>0) {
     clockCount --;
   } else if (bClockCount) {
     bInNum = new boolean[bitSize];
   }
-  background(0);
-  drawNumber(50,20,sInNum);
+  
+  drawNumber(50, 20, sInNum);
   for (int i = 0; i < bitSize; i++) {
     adders[i].drawAdder(0, 240 + 15*i, i);
     flipFlops[i].drawFlipFlop(i, sizeX, 240 + 15*i);
@@ -62,7 +65,7 @@ void draw() {
     bOutNum[i] = flipFlops[i].gAnd3.out1;
   }
   iOutNum = i16ToNum(bOutNum);
-  drawNumber(width-150,20,""+iOutNum);
+  drawNumber(width-150, 20, ""+iOutNum);
 }
 
 void keyPressed() {
@@ -104,7 +107,7 @@ boolean[] numTo16(int in) {
   ArrayList<Boolean> bitresults = new ArrayList<Boolean>(); 
   int div2 = in;
   println(div2);
-  if (div2<131071) {
+  if (div2<65536) {
     while (div2>=1) {
       println(div2);
       if (div2 % 2 == 1) {
@@ -115,14 +118,14 @@ boolean[] numTo16(int in) {
         println("false");
       }
       div2 = div2/2;
-      for (int i = 0; i<bitresults.size(); i++) {
-        processed[i] = bitresults.get(i);
-      }
     }
   } else {
     clock = false;
   }
-
+  for (int i = 0; i<bitresults.size(); i++) {
+    println(i);
+    processed[i] = bitresults.get(i);
+  }
 
   return processed;
 };
@@ -132,20 +135,18 @@ int i16ToNum(boolean[] inBits) {
   for (int i = 0; i<inBits.length; i++) {
     if (inBits[i]) {
       println(result);
-      result = result + int(pow(2,i));
+      result = result + int(pow(2, i));
       println(i, result);
-      
     }
   }
-  
+
   return result;
 };
-void drawNumber(float x, float y, String in){
-  if (in == ""){
-   in = "0"; 
+void drawNumber(float x, float y, String in) {
+  if (in == "") {
+    in = "0";
   }
   textSize(24);
-  fill(255,0,0);
-  text(in,x,y); 
-  
+  fill(255, 0, 0);
+  text(in, x, y);
 }

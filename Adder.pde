@@ -1,5 +1,4 @@
 class adder {
-
   boolean cIn;
   boolean cOut;
   boolean out;
@@ -17,28 +16,49 @@ class adder {
     posY = y;
     gXor1 = new xor(posX-40, posY-20);
     gXor2 = new xor(posX+7, posY-20);
-    gAnd1 = new and(posX-40, posY+20,false);
-    gAnd2 = new and(posX, posY,false);
+    gAnd1 = new and(posX-40, posY+20, false);
+    gAnd2 = new and(posX, posY, false);
     gOr1 = new or(posX+40, posY+20);
   }
   void drawAdder(float in1X, float in1Y, int bit) {
     textSize(12);
-    fill(255);
+    stroke(255);
+    noFill();
     //in 1 to xor1 and and1
+    if (textOn)text("in" + (bit+1), in1X, in1Y);
     if (bInNum[bit]== true) {
-      if (textOn)text("in" + (bit+1), in1X, in1Y);
-      line(in1X, in1Y, gXor1.x, gXor1.y);
-      line(in1X, in1Y, gAnd1.x, gAnd1.y);
+      float inbx;
+      float inby;
+      
+      inbx = gXor1.x/2;
+      inby = (gXor1.y-in1Y)/2;
+      line(in1X, in1Y, gXor1.x,gXor1.y);
+      beginShape();
+      curveVertex(in1X,in1Y);
+      curveVertex(inbx, in1Y+inby);
+      curveVertex(gAnd1.x, gAnd1.y);
+      curveVertex(gAnd1.x, gAnd1.y);
+      endShape();
+      
+      //curve(inbx,gXor1.y,inbx, in1Y+inby, gAnd1.x, gAnd1.y,gAnd1.x,gAnd1.y);
+
+      //line(in1X, in1Y, gAnd1.x, gAnd1.y);
+      //curve(in1X, in1Y-inby, in1X, in1Y, gAnd1.x, gAnd1.y, gAnd1.x, gAnd1.y);
     }
     //flip flop out to xor1 and and1
     if (flipFlops[bit].out == true) {
-      line(flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, gXor1.x, gXor1.y);
-      line(flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, gAnd1.x, gAnd1.y);
+      //line(flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, gXor1.x, gXor1.y);
+      curve(flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, gXor1.x, gXor1.y, gXor1.x, gXor1.y);
+      //line(flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, gAnd1.x, gAnd1.y);
+      curve(flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, flipFlops[bit].gAnd3.x, flipFlops[bit].gAnd3.y, gAnd1.x, gAnd1.y,gAnd1.x, gAnd1.y );
     }
     //cIn to xor2 and and2
-    if (cIn == true) {
-      line(adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, gXor2.x, gXor2.y);
-      line(adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, gAnd2.x, gAnd2.y);
+    
+    if (bit>0 && adders[bit-1].gOr1.out1 == true) {
+      //line(adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, gXor2.x, gXor2.y);
+      curve(adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, gXor2.x, gXor2.y,gXor2.x, gXor2.y );
+      //line(adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, gAnd2.x, gAnd2.y);
+      curve(adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, adders[bit-1].gOr1.x, adders[bit-1].gOr1.y, gAnd2.x, gAnd2.y,gAnd2.x, gAnd2.y );
     }
 
     //xor1 to zor2 and and2
@@ -49,8 +69,10 @@ class adder {
 
     if (gXor1.out1 == true) {
 
-      line(gXor1.x, gXor1.y, gXor2.x, gXor2.y);
-      line(gXor1.x, gXor1.y, gAnd2.x, gAnd2.y);
+      //line(gXor1.x, gXor1.y, gXor2.x, gXor2.y);
+      curve(gXor1.x, gXor1.y, gXor1.x, gXor1.y, gXor2.x, gXor2.y,gXor2.x, gXor2.y );
+      //line(gXor1.x, gXor1.y, gAnd2.x, gAnd2.y);
+      curve(gXor1.x, gXor1.y, gXor1.x, gXor1.y, gAnd2.x, gAnd2.y,gAnd2.x, gAnd2.y );
     }
 
     //and1 to or1
@@ -59,12 +81,14 @@ class adder {
       text("or1" + bit, gOr1.x, gOr1.y);
     }
     if (gAnd1.out1 == true) {
-      line(gAnd1.x, gAnd1.y, gOr1.x, gOr1.y);
+      //line(gAnd1.x, gAnd1.y, gOr1.x, gOr1.y);
+      curve(gAnd1.x,gAnd1.y, gAnd1.x, gAnd1.y, gOr1.x, gOr1.y,gOr1.x, gOr1.y );
     }
     //and2 to or1
     if (textOn) text("and2" + bit, gAnd2.x, gAnd2.y);
     if (gAnd2.out1 == true) {
-      line(gAnd2.x, gAnd2.y, gOr1.x, gOr1.y);
+      //line(gAnd2.x, gAnd2.y, gOr1.x, gOr1.y);
+      curve(gAnd1.x,gAnd1.y, gAnd1.x, gAnd1.y, gOr1.x, gOr1.y, gOr1.x, gOr1.y );
     }
   }
   void calc(int bit, boolean in) {
