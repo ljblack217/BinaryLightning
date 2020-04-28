@@ -1,32 +1,31 @@
 void audioSetup() {
-  println("ye? " );
-  sound = new AudioContext();
-  peaks = new SamplePlayer[4];
-  bGBuzz = new SamplePlayer(sound, SampleManager.sample(dataPath("")+"/ON.wav"));
-  bGBuzz.setKillOnEnd(false);
-  
-  //g1 for peaking events
-  g1 = new Gain(sound, 1, 0.2);
-  //g2 for the background buzzing
-  g2 = new Gain(sound, 1, 0.2);
-  g2.addInput(bGBuzz);
-  
-  //peaks
-  for (int n = 0; n<4; n++) {
-    //println(dataPath("")+"/Peak" + (n+1) + ".wav");
-    peaks[n] = new SamplePlayer(sound, SampleManager.sample(dataPath("")+"/Peak" + (n+1) + ".wav"));
+  ac = new AudioContext();
+  peaks = new SamplePlayer[s];
+  g = new Gain(ac, 1,0.8);
+  for (int n = 0; n<s; n++) {
+    peaks[n] = new SamplePlayer(ac, SampleManager.sample(dataPath("")+"/Peak"+(n+1)+".wav"));
     peaks[n].setKillOnEnd(false);
     peaks[n].setToEnd();
-    g1.addInput(peaks[n]);
-  }
-  sound.out.addInput(g1);
-  sound.out.addInput(g2);
-  sound.start();
+    g.addInput(peaks[n]);
+    
 }
-void changeSound() {
-  
-  int i = int(random(4));
-  
+  ac.out.addInput(g);
+  //buzz = new SoundFile(this, "ON.wav");
+}
+
+//void buzzCheck(boolean clk){
+//  if(clk == true && buzz.isPlaying()==false){
+//    buzz.loop(); 
+//    //println("ye?");
+//  }else if(clk == false){
+//    buzz.stop();
+//  }
+//}
+
+void blip(){
+  println("ye?");
+  //int i = int(random(s));
+  int i = 1;
   peaks[i].setToLoopStart();
   peaks[i].start();
 }

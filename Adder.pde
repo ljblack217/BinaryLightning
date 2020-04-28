@@ -29,7 +29,7 @@ class adder {
     if (bInNum[bit]== true) {
       float inbx;
       float inby;
-
+      blip();
       inbx = gXor1.x/2;
       inby = (gXor1.y-in1Y)/2;
       line(in1X, in1Y, gXor1.x, gXor1.y);
@@ -88,6 +88,7 @@ class adder {
     //cIn to xor2 and and2
 
     if (bit>0 && adders[bit-1].gOr1.out1 == true) {
+      blip();
       //stroke(0, shadowLvl);
 
       //for (float i = 1.5; i<shadowSize; i++) {
@@ -143,11 +144,13 @@ class adder {
     }
     if (gAnd1.out1 == true) {
       line(gAnd1.x, gAnd1.y, gOr1.x, gOr1.y);
+      blip();
       //curve(gAnd1.x, gAnd1.y, gAnd1.x, gAnd1.y, gOr1.x, gOr1.y, gOr1.x, gOr1.y );
     }
     //and2 to or1
     if (textOn) text("and2" + bit, gAnd2.x, gAnd2.y);
     if (gAnd2.out1 == true) {
+      blip();
       line(gAnd2.x, gAnd2.y, gOr1.x, gOr1.y);
       //curve(gAnd1.x, gAnd1.y, gAnd1.x, gAnd1.y, gOr1.x, gOr1.y, gOr1.x, gOr1.y );
     }

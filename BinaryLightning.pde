@@ -1,4 +1,5 @@
 import beads.*;
+//import processing.sound.*;
 import java.util.Arrays;
 
 
@@ -22,12 +23,13 @@ PFont consolas;
 float shadowSize = 6;
 float shadowLvl = 20;
 
-AudioContext sound;
-Noise test;
-Gain g1;
-Gain g2;
+AudioContext ac;
+Gain g;
+
 SamplePlayer[] peaks;
-SamplePlayer bGBuzz;
+//SoundFile buzz;
+int s = 6;
+
 
 void setup() {
   consolas = createFont("Consolas.ttf", 32);
@@ -89,7 +91,7 @@ void draw() {
   }
   iOutNum = i16ToNum(bOutNum);
   drawNumber(width-150, 20, ""+iOutNum);
-  
+  //buzzCheck(clock);
 }
 
 void keyPressed() {
@@ -115,7 +117,8 @@ void keyPressed() {
     bClockCount = true;
     clockCount = 3;
     
-    changeSound();
+    //changeSound();
+    
     
   } else if (key == 'z') {
     if (textOn) {
